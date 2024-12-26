@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor & Aktuator Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: justify;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #444;
+            text-align: center;
+            background: linear-gradient(135deg, #cf4c7a, #dc6889);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .input-form label {
+            font-size: 1em;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .input-form input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .result h3 {
+            margin-bottom: 10px;
+            color: #3d3838;
+            text-align: center;
+        }
+        .result table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .result table, .result th, .result td {
+            border: 1px solid #ddd;
+        }
+        .result th, .result td {
+            padding: 8px;
+            text-align: center;
+        }
+        .result th {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Dashboard Sensor dan Aktuator</h1>
+    
+    <form class="input-form" id="sensorForm" action="/process" method="POST">
+        <label for="temperatur">Temperatur (&#8451;):</label>
+        <input type="number" id="temperatur" name="temperatur" required>
+
+        <label for="kelembapan">Kelembapan (%):</label>
+        <input type="number" id="kelembapan" name="kelembapan" required>
+
+        <label for="konsentrasigas">Konsentrasi Gas (ppm):</label>
+        <input type="number" id="konsentrasigas" name="konsentrasigas" required>
+
+        <label for="intensitascahaya">Intensitas Cahaya (lux):</label>
+        <input type="number" id="intensitascahaya" name="intensitascahaya" required>
+
+        <label for="api">Api:</label>
+        <input type="number" id="api" name="api" required>
+
+        <button class="button" type="submit">Proses Sensor</button>
+    </form>
+
+    <div class="result">
+        <h3>Output Aktuator</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aktuator</th>
+                    <th>Fuzzy Logic</th>
+                    <th>Neural Network</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AC</td>
+                    <td>{{ ac }}</td>
+                    <td>{{ nn_ac }}</td>
+                </tr>
+                <tr>
+                    <td>Humidifier</td>
+                    <td>{{ humidifier }}</td>
+                    <td>{{ nn_humidifier }}</td>
+                </tr>
+                <tr>
+                    <td>Exhaust Fan</td>
+                    <td>{{ exhaustfan }}</td>
+                    <td>{{ nn_exhaustfan }}</td>
+                </tr>
+                <tr>
+                    <td>LED Lamp</td>
+                    <td>{{ ledlamp }}</td>
+                    <td>{{ nn_ledlamp }}</td>
+                </tr>
+                <tr>
+                    <td>Buzzer</td>
+                    <td>{{ buzzer }}</td>
+                    <td>{{ nn_buzzer }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
